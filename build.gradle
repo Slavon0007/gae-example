@@ -1,0 +1,61 @@
+// Configuration for building
+buildscript {
+    repositories {
+        // Bintray's repository - a fast Maven Central mirror & more
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        // latest App Engine Gradle tasks
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:+'
+    }
+}
+
+// repositories for Jar's you access in your code
+repositories {
+    maven {
+        // SNAPSHOT repository (if needed)
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+    mavenCentral()
+    jcenter()
+}
+
+// standard Java tasks
+apply plugin: 'java'
+
+// standard Web Archive plugin
+apply plugin: 'war'
+
+// App Engine tasks
+apply plugin: 'com.google.cloud.tools.appengine'
+
+dependencies {
+    // Latest App Engine Api's
+    compile 'com.google.appengine:appengine-api-1.0-sdk:+'
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    testCompile 'junit:junit:4.12'
+}
+
+// App Engine tasks configuration
+appengine {
+    // deploy configuration
+    deploy {
+        promote = false
+        project = 'gl-salsus'
+        version = 'update'
+    }
+}
+
+// Generated output GroupId
+group = "com.example"
+
+// Version in generated output
+version = "1.0-SNAPSHOT"
+
+// App Engine Flexible uses Java 8
+sourceCompatibility = 1.7
+
+// App Engine Flexible uses Java 8
+targetCompatibility = 1.7     
