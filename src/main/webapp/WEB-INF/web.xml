@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <servlet>
-        <servlet-name>example-servlet-name</servlet-name>
-        <servlet-class>com.example.ExampleServlet</servlet-class>
+        <servlet-name>users</servlet-name>
+        <servlet-class>com.servlets.UsersServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
-        <servlet-name>example-servlet-name</servlet-name>
-        <url-pattern>/example</url-pattern>
+        <servlet-name>users</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>home work</servlet-name>
+        <servlet-class>com.servlets.HTMLServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>home work</servlet-name>
+        <url-pattern>/user/home-task</url-pattern>
     </servlet-mapping>
 </web-app>
+
