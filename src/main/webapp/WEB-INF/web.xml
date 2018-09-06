@@ -19,5 +19,16 @@
         <servlet-name>home work</servlet-name>
         <url-pattern>/user/home-task</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>loginForm</servlet-name>
+        <servlet-class>com.servlets.UserForm</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>loginForm</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
 </web-app>
 
