@@ -1,42 +1,47 @@
 package com.servlets;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.StringWriter;
 
 public class UserForm extends HTMLServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Velocity.init();
 
+        VelocityContext context = new VelocityContext();
 
-        String name = req.getParameter("slavkaklimov");
-        String pasword = "slavakava";
+        Template template = null;
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("<html>");
-        builder.append("<head>");
-        builder.append("<head>");
-        builder.append("<body>");
-        builder.append("<form action=\"/login\" method=\"post\">");
-        builder.append("<div class=\"form-group\">");
-        builder.append("<label for=\"email\">email</label>");
-        builder.append("<input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\">");
-        builder.append(" </div>");
-        builder.append(" <div class=\"form-group\">");
-        builder.append(" <label for=\"pwd\">Password:</label>");
-        builder.append("<input type=\"password\" class=\"form-control\" id=\"pwd\" name=\"password\">");
-        builder.append(" </div>");
-        builder.append("<div class=\"checkbox\">");
-        builder.append(" <label><input type=\"checkbox\"> Remember me</label>");
-        builder.append(" </div>");
-        builder.append("<button type=\"submit\" class=\"btn btn-default\">Submit</button>");
-        builder.append("</form>");
-        builder.append("<body>");
-        builder.append("</html>");
+        try
+        {
+            template = Velocity.getTemplate("templates/login.html");
+        }
+        catch( ResourceNotFoundException e )
+        {
+            resp.getWriter().write(e.getMessage());
+        }
+        catch( ParseErrorException pee )
+        {
+            resp.getWriter().write(pee.getMessage());
+        }
+        catch( MethodInvocationException e )
+        {
+            resp.getWriter().write(e.getMessage());
 
-        resp.getWriter().write(builder.toString());
+        }
+
+        template.merge( context, resp.getWriter() );
     }
 
     @Override
