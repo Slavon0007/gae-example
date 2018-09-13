@@ -2,7 +2,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <servlet>
         <servlet-name>users</servlet-name>
-        <servlet-class>com.servlets.UsersServlet</servlet-class>
+        <servlet-class>com.servlets.UsersListServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>loginForm</servlet-name>
-        <servlet-class>com.servlets.UserForm</servlet-class>
+        <servlet-class>com.servlets.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
