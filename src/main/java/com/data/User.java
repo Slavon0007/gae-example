@@ -28,4 +28,16 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("Email: ");
+        builder.append(email);
+        builder.append(". Name: ");
+        builder.append(name);
+        builder.append(". Password: ");
+        builder.append(password);
+
+        return builder.toString();
+    }
 }

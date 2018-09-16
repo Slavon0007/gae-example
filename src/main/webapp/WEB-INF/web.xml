@@ -30,5 +30,15 @@
         <servlet-name>loginForm</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createUserServlet</servlet-name>
+        <servlet-class>com.servlets.CreateUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>createUserServlet</servlet-name>
+        <url-pattern>/users/create</url-pattern>
+    </servlet-mapping>
 </web-app>
 

@@ -1,5 +1,6 @@
 package com.servlets;
 
+import com.data.User;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -14,18 +15,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CreateUserServlet extends HttpServlet {
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         VelocityContext context = new VelocityContext();
-
-        Template template = null;
+        Template template;
 
         try
         {
             //создание обьекта типа Template с помощью метода getTemplate библиотеки Velocity который
             //в качестве аргумента принимает параметр типа String, который яляется путем к файлу шаблона
-            template = Velocity.getTemplate("templates/login.html");
+            template = Velocity.getTemplate("templates/createUser.html");
+            template.merge( context, resp.getWriter() );
         }
         catch( ResourceNotFoundException e )
         {
@@ -40,28 +42,21 @@ public class CreateUserServlet extends HttpServlet {
             resp.getWriter().write(e.getMessage());
         }
 
-        template.merge( context, resp.getWriter() );
-
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+        User user = new User();
+
         String password = request.getParameter("password");
+        user.setPassword(password);
 
-        System.out.println("Password is: " + password);
-
-        String user = request.getParameter("email");
-
-        System.out.println("Login is; " + user);
+        String email = request.getParameter("email");
+        user.setEmail(email);
 
         String name = request.getParameter("name");
+        user.setName(name);
 
-        System.out.println("Login is; " + name);
-
-        String confirmPassword = request.getParameter("confirm password");
-
-        System.out.println("Login is; " + confirmPassword);
-        
-
+        response.getWriter().write(user.toString());
     }
- }
+}
 
