@@ -5,13 +5,15 @@ public abstract class SchoolThings {
 
     public SchoolThings(String producedBy){
 
-         this.producedBy = producedBy;
+        if (producedBy == null) {
+            this.producedBy = "Not define";
+        } else {
+            this.producedBy = producedBy;
+        }
+
     }
 
+
     @Override
-    public String toString() {
-        return
-                "producedBy='" + producedBy
-                ;
-    }
+    public String toString() { return "producedBy" + producedBy; }
 }

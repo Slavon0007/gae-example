@@ -9,16 +9,17 @@ import app.computer.SystemBlock;
 import app.family02.Family2;
 import app.family02.Family3;
 import app.family02.Member;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class AppTest {
 
     @Test
     public void testMonitor() {
         Computer computer = new Computer("some factory");
-        computer.setMonitor(new Monitor("some factory", 17, "lCD"));
+       computer.setMonitor(new Monitor("some factory", 17, "lCD"));
 
         assertEquals("monitor", computer.toString());
     }
@@ -32,13 +33,13 @@ public class AppTest {
         assertEquals("monitor" + "mousse", computer.toString());
     }
 
-    @Test
+   @Test
     public void testMonitorKeyboard() {
         Computer computer = new Computer("some factory");
         computer.setMonitor(new Monitor("some factory", 17, "lCD"));
         computer.setKeyboard(new Keyboard("some factory 2", "genius", "33"));
 
-        assertEquals("monitorkeyboard", computer.toString());
+       assertEquals("monitorkeyboard", computer.toString());
     }
 
     @Test
