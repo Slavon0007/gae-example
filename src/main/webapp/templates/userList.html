@@ -11,19 +11,23 @@
     </head>
 
     <body>
-        <table class="table table-bordered">
-            #foreach($user in $users)
-            <table class="table">
-               <tr>
-                   <td>
-                       $user
-                   </td>
-               </tr>
-            </table>
-                      #end
+        #foreach($user in $users)
+
+             <table class="table" border="1">
+                 <th>Name</th>
+                 <th>Email</th>
+                 <th>Password</th>
+                   <tr>
+                       <td>$user.getName()</td>
+                       <td>$user.getEmail()</td>
+                       <td>$user.getPassword()</td>
+                   </tr>
+             </table>
+                #end
 
 
+                     <button><a  href="http://localhost:8080/users/create"> ADD USER</a></button>
 
-        </table>
+
     </body>
 </html>

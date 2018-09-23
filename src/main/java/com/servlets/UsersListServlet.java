@@ -25,13 +25,14 @@ public class UsersListServlet extends HttpServlet {
 
         VelocityContext context = new VelocityContext();
 
+        User user = new User();
 
         UsersDAO dao = new UsersDAO();
 
         List<User> users = dao.getAll();
 
         context.put("users", users);
-
+        context.put("user",user);
         Template template;
 
         try {

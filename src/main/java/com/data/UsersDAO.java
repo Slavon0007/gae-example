@@ -8,7 +8,7 @@ public class UsersDAO {
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             User user = new User();
             user.setEmail("slava.dev." + i + "gmail.com");
             user.setPassword("pswd");
