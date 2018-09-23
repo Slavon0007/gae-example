@@ -1,19 +1,18 @@
 package app.box;
 
-public abstract class SchoolThings {
+public abstract class SchoolThing {
     protected String producedBy;
 
-    public SchoolThings(String producedBy){
-
+    public SchoolThing(String producedBy) {
         if (producedBy == null) {
             this.producedBy = "Not define";
         } else {
             this.producedBy = producedBy;
         }
-
     }
 
-
     @Override
-    public String toString() { return "producedBy" + producedBy; }
+    public String toString() {
+        return "producedBy: " + producedBy;
+    }
 }

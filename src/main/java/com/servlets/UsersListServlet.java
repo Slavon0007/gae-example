@@ -2,7 +2,14 @@ package com.servlets;
 
 import com.data.User;
 import com.data.UsersDAO;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,55 +17,40 @@ import java.io.IOException;
 import java.util.List;
 
 public class UsersListServlet extends HttpServlet {
+
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        VelocityContext context = new VelocityContext();
+
+
         UsersDAO dao = new UsersDAO();
+
         List<User> users = dao.getAll();
 
-        StringBuilder builder = new StringBuilder();
+        context.put("users", users);
 
-        builder.append("<html>");
-        builder.append("<body>");
+        Template template;
 
-        builder.append("<table>");
-        builder.append("<thead>");
-        builder.append("<th>Email</th>");
-        builder.append("<th>Password</th>");
-        builder.append("<th>Name</th>");
-        builder.append("</thead");
+        try {
+            //создание обьекта типа Template с помощью метода getTemplate библиотеки Velocity который
+            //в качестве аргумента принимает параметр типа String, который яляется путем к файлу шаблона
+            template = Velocity.getTemplate("templates/userList.html");
 
-        builder.append("<tbody>");
+            template.merge(context, resp.getWriter());
+        } catch (ResourceNotFoundException e) {
 
-        for (User user : users) {
-            builder.append("<tr>");
+            resp.getWriter().write(e.getMessage());
+        } catch (ParseErrorException pee) {
 
-            builder.append("<td>");
-            builder.append(user.getEmail());
-            builder.append("</td>");
+            resp.getWriter().write(pee.getMessage());
+        } catch (MethodInvocationException e) {
 
-            builder.append("<td>");
-            builder.append(user.getPassword());
-            builder.append("</td>");
-
-            builder.append("<td>");
-            builder.append(user.getName());
-            builder.append("</td>");
-
-            builder.append("</tr>");
-
-            builder.append("<form action = \"/\">");
-            builder.append(user.getName());
-            builder.append(user.getPassword());
-            builder.append("</form action>");
-
+            resp.getWriter().write(e.getMessage());
         }
 
-        builder.append("</tbody>");
-        builder.append("</table>");
-        builder.append("</body>");
-        builder.append("</html>");
-
-        resp.getWriter().write(builder.toString());
 
     }
 }
