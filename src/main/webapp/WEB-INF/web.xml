@@ -40,5 +40,15 @@
         <servlet-name>createUserServlet</servlet-name>
         <url-pattern>/users/create</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>editUserServlet</servlet-name>
+        <servlet-class>com.servlets.EditUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>editUserServlet</servlet-name>
+        <url-pattern>/users/edit</url-pattern>
+    </servlet-mapping>
 </web-app>
 
