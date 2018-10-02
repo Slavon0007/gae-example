@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class GetCookieServlet extends HttpServlet {
     public  void doGet(HttpServletRequest req, HttpServletResponse resp) throws SecurityException, IOException {
-        Context context = new Context() ;
+
         Cookie[] cookies = req.getCookies();
 
         for( Cookie cookie : cookies){

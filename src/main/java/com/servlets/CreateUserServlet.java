@@ -9,6 +9,7 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,10 @@ public class CreateUserServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Cookie cookie = new Cookie("kay","mybest");
+        cookie.setMaxAge(23*60*60);
+        resp.addCookie(cookie);
 
         VelocityContext context = new VelocityContext();
         Template template;
