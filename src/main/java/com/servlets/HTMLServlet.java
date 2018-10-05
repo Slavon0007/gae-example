@@ -11,7 +11,7 @@ import java.util.Arrays;
 /**
  * Servlet try to parse 2 parameters and sum it. Simplest version without error handling
  */
-public class HTMLServlet extends HttpServlet {
+public abstract class HTMLServlet extends HttpServlet {
 
 
     @Override
@@ -57,4 +57,5 @@ public class HTMLServlet extends HttpServlet {
     }
 
 
+    public abstract void  doGet()
 }

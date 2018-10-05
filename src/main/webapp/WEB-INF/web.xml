@@ -52,34 +52,23 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>SetCookieServlet</servlet-name>
-        <servlet-class>SetCookieServlet</servlet-class>
+        <servlet-name>countServlet</servlet-name>
+        <servlet-class>com.servlets.CountServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>SetCookieServlet</servlet-name>
-        <url-pattern>/set-cookie </url-pattern>
+        <servlet-name>countServlet</servlet-name>
+        <url-pattern>/count</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>GetCookieServlet</servlet-name>
-        <servlet-class>GetCookieServlet</servlet-class>
-    </servlet>
+    <filter>
+        <filter-name>FilterMy</filter-name>
+        <filter-class>com.servlets.MyFilter</filter-class>
+    </filter>
 
-    <servlet-mapping>
-        <servlet-name>GetCookieServlet</servlet-name>
-        <url-pattern>/get-cookie </url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>DeleteCookieServlet</servlet-name>
-        <servlet-class>DeleteCookieServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>DeleteCookieServlet</servlet-name>
-        <url-pattern>/delete-cookie </url-pattern>
-    </servlet-mapping>
-
+    <filter-mapping>
+        <filter-name>FilterMy</filter-name>
+        <url-pattern>/users/*</url-pattern>
+    </filter-mapping>
 </web-app>
 

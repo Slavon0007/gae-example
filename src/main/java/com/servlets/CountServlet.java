@@ -1,7 +1,5 @@
 package com.servlets;
 
-import com.data.User;
-import com.data.UsersDAO;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -9,58 +7,56 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 
-public class UsersListServlet extends HttpServlet {
-
+public class CountServlet extends HttpServlet {
 
 
     @Override
-    protected  void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 
+        Cookie cookie = new Cookie("Some_id","1");
+
+        cookie.setMaxAge(30);
+
+        response.addCookie(cookie);
 
         VelocityContext context = new VelocityContext();
-
-        User user = new User();
-
-        UsersDAO dao = new UsersDAO();
-
-        List<User> users = dao.getAll();
-
-        context.put("users", users);
-        context.put("user",user);
         Template template;
 
-        Cookie[] cookies = req.getCookies();
-
-        for(Cookie cookie:cookies)
-           cookie.getValue();
-
-
-
-
-            try {
+        try {
             //создание обьекта типа Template с помощью метода getTemplate библиотеки Velocity который
             //в качестве аргумента принимает параметр типа String, который яляется путем к файлу шаблона
-            template = Velocity.getTemplate("templates/userList.html");
-
-            template.merge(context, resp.getWriter());
+            template = Velocity.getTemplate("templates/countServlet.html");
+            template.merge(context, response.getWriter());
         } catch (ResourceNotFoundException e) {
-
-            resp.getWriter().write(e.getMessage());
+            response.getWriter().write(e.getMessage());
         } catch (ParseErrorException pee) {
-
-            resp.getWriter().write(pee.getMessage());
+            response.getWriter().write(pee.getMessage());
         } catch (MethodInvocationException e) {
+            response.getWriter().write(e.getMessage());
+        }
 
-            resp.getWriter().write(e.getMessage());
+
+    }
+
+    @Override
+    public  void  doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
+        Cookie[] cookies = request.getCookies();
+
+        PrintWriter pw = response.getWriter();
+
+         for(Cookie cookie:cookies){
+                pw.println(cookie.getValue()+1);
         }
 
     }
+
+
 }
