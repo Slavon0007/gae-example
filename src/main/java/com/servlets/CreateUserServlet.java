@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CreateUserServlet extends HttpServlet {
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cookie cookie = new Cookie("userKey", "mybest");
@@ -25,7 +25,7 @@ public class CreateUserServlet extends HttpServlet {
 
         VelocityContext context = new VelocityContext();
         Template template;
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
         try {
             //создание обьекта типа Template с помощью метода getTemplate библиотеки Velocity который
             //в качестве аргумента принимает параметр типа String, который яляется путем к файлу шаблона
@@ -41,6 +41,7 @@ public class CreateUserServlet extends HttpServlet {
 
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         Cookie[] cookies = request.getCookies();
@@ -59,7 +60,7 @@ public class CreateUserServlet extends HttpServlet {
                 break;
             }
         }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (!isCookieValid) {
             response.getWriter().write("Cookie is not valid");
             return;

@@ -61,13 +61,33 @@
         <url-pattern>/count</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>countToTenServlet</servlet-name>
+        <servlet-class>com.servlets.CountToTenServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>countToTenServlet</servlet-name>
+        <url-pattern>/count/to</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userNotAuthorizedServlet</servlet-name>
+        <servlet-class>com.servlets.UserNotAuthorizedServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>userNotAuthorizedServlet</servlet-name>
+        <url-pattern>/not/authorized</url-pattern>
+    </servlet-mapping>
+
     <filter>
-        <filter-name>FilterMy</filter-name>
-        <filter-class>com.servlets.MyFilter</filter-class>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.servlets.UserFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>FilterMy</filter-name>
+        <filter-name>UserFilter</filter-name>
         <url-pattern>/users/*</url-pattern>
     </filter-mapping>
 </web-app>

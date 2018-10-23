@@ -20,11 +20,9 @@ import java.util.List;
 public class UsersListServlet extends HttpServlet {
 
 
-
     @Override
-    protected  void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+//////////////////////////////////////////////////////////////////////////////////////////////////////
         VelocityContext context = new VelocityContext();
 
         User user = new User();
@@ -34,18 +32,11 @@ public class UsersListServlet extends HttpServlet {
         List<User> users = dao.getAll();
 
         context.put("users", users);
-        context.put("user",user);
+        context.put("user", user);
+
         Template template;
-
-        Cookie[] cookies = req.getCookies();
-
-        for(Cookie cookie:cookies)
-           cookie.getValue();
-
-
-
-
-            try {
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+        try {
             //создание обьекта типа Template с помощью метода getTemplate библиотеки Velocity который
             //в качестве аргумента принимает параметр типа String, который яляется путем к файлу шаблона
             template = Velocity.getTemplate("templates/userList.html");
@@ -61,6 +52,5 @@ public class UsersListServlet extends HttpServlet {
 
             resp.getWriter().write(e.getMessage());
         }
-
     }
 }

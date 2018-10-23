@@ -31,7 +31,7 @@ public class CountServlet extends HttpServlet {
             cookies = new Cookie[]{cookie};
             response.addCookie(cookies[0]); // я ложу ноль что бы получить следующее значение
         } else {                            //циклом фор перебераю масив
-            for(Cookie cookie:cookies) {
+            for (Cookie cookie : cookies) {
                 value = Integer.parseInt(cookie.getValue());  // в переменную записываю значения куки и перевожу в инт
                 value++;                                    // делаю инкрементацию
                 cookie.setValue(String.valueOf(value));     //записываю в куки значения инкримента и перевожу в стринг
@@ -40,7 +40,7 @@ public class CountServlet extends HttpServlet {
             }
         }
 
-       // response.setContentType("text/html");
+        // response.setContentType("text/html");
 
     }
 

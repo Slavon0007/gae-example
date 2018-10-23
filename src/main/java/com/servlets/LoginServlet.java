@@ -8,45 +8,45 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Cookie cookies = new Cookie("email", "password");
+        cookies.setMaxAge(23 * 60 * 60);
+        resp.addCookie(cookies);
+
         Velocity.init();
 
         VelocityContext context = new VelocityContext();
 
         Template template = null;
-
-        try
-        {
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+        try {
             //создание обьекта типа Template с помощью метода getTemplate библиотеки Velocity который
             //в качестве аргумента принимает параметр типа String, который яляется путем к файлу шаблона
             template = Velocity.getTemplate("templates/login.html");
-        }
-        catch( ResourceNotFoundException e )
-        {
+        } catch (ResourceNotFoundException e) {
             resp.getWriter().write(e.getMessage());
-        }
-        catch( ParseErrorException pee )
-        {
+        } catch (ParseErrorException pee) {
             resp.getWriter().write(pee.getMessage());
-        }
-        catch( MethodInvocationException e )
-        {
+        } catch (MethodInvocationException e) {
             resp.getWriter().write(e.getMessage());
         }
 
-        template.merge( context, resp.getWriter() );
+        template.merge(context, resp.getWriter());
     }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+/////////////////////////////////////////////////////////////////////////////////////////////////////
         String password = request.getParameter("password");
 
         System.out.println("Password is: " + password);
@@ -57,8 +57,8 @@ public class LoginServlet extends HttpServlet {
 
         String login = "slava@dot.com";
         String pass = "Slava";
-
-        if (pass.equals(password) && login.equals(user)){
+//////////////////////////////////////////////////////////////////////////////////////////////////
+        if (pass.equals(password) && login.equals(user)) {
             response.sendRedirect("/users");
         } else {
             response.sendRedirect("/login");
